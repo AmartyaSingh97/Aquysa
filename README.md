@@ -1,6 +1,5 @@
 # 💧 Aquysa  
 *A simple and elegant water drinking reminder app built with Jetpack Compose, featuring an interactive Glance widget.*  
-Completely local and uses Workmanager to schedule notifications
 
 ---
 
