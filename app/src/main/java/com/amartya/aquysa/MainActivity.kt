@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
@@ -17,13 +18,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.amartya.aquysa.ui.screens.MainApp
 import com.amartya.aquysa.ui.theme.AquysaTheme
+import kotlin.getValue
 
 class MainActivity : ComponentActivity() {
     private val snackbarMessage = mutableStateOf<String?>(null)
+
+    private val splashViewModel : SplashViewmodel by viewModels()
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -34,6 +39,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
@@ -48,6 +55,11 @@ class MainActivity : ComponentActivity() {
                     snackbarMessage = message,
                     onSnackbarDismiss = { snackbarMessage.value = null }
                 )
+                installSplashScreen().apply {
+                    setKeepOnScreenCondition{
+                        splashViewModel.isSplashShow.value
+                    }
+                }
             }
         }
     }

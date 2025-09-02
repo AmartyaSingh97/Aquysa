@@ -80,6 +80,9 @@ dependencies {
     // Glance (for App Widgets)
     implementation(libs.androidx.glance.appwidget)
     implementation(libs.androidx.glance.material3)
+
+    //Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 }
 kapt {
     correctErrorTypes = true

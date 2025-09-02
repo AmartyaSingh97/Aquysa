@@ -44,7 +44,7 @@ fun AnalysisScreen(viewModel: MainViewModel) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(dateFormat.format(intake.timestamp))
-                    Text("${intake.amount} ml", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                    Text(" ${intake.amount} ml", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                 }
             }
         }
