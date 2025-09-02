@@ -24,4 +24,4 @@ Support it by joining __[stargazers](https://github.com/AmartyaSingh97/Aquysa/st
 Also, __[follow me](https://github.com/AmartyaSingh97)__ on GitHub for my next creations! 🤩
 
 ## Visitors Count
-<img align="left" src = "https://profile-counter.glitch.me/Krishi-Frontend/count.svg" alt ="Loading">
+<img align="left" src = "https://profile-counter.glitch.me/Aquysa/count.svg" alt ="Loading">
