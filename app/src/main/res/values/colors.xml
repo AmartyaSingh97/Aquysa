@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#FF4CA5AE</color>
 
+    <color name="progress_blue">#00BFFF</color>
+    <color name="progress_background">#B0E0E6</color>
+
 </resources>

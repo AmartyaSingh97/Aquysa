@@ -2,6 +2,7 @@ package com.amartya.aquysa.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
@@ -10,7 +11,6 @@ import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.action.actionParametersOf
 import androidx.glance.action.clickable
-import androidx.glance.appwidget.LinearProgressIndicator
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.background
@@ -19,7 +19,6 @@ import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
-import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.layout.size
@@ -40,7 +39,6 @@ fun WidgetContent() {
     val currentIntake = prefs[intakeKey] ?: 0
     val dailyGoal = prefs[goalKey] ?: 4000
     val progress = (currentIntake.toFloat() / (dailyGoal.toFloat()).coerceAtLeast(1f)).coerceIn(0f, 1f)
-
 
     Row(
         modifier = GlanceModifier
@@ -73,14 +71,13 @@ fun WidgetContent() {
                 )
             )
             Spacer(GlanceModifier.height(8.dp))
-            LinearProgressIndicator(
+            ProgressBar(
                 progress = progress,
-                modifier = GlanceModifier.fillMaxWidth().height(10.dp).cornerRadius(10.dp),
-                color = ColorProvider(Color(0xFF00BFFF)),
-                backgroundColor = ColorProvider(Color(0xFFB0E0E6)),
+                totalWidth = 200.dp,
+                backgroundColor = Color(0xFFB0E0E6),
+                progressColor = Color(0xFF4CA5AE)
             )
         }
-
 
         Spacer(GlanceModifier.width(12.dp))
 
@@ -92,6 +89,33 @@ fun WidgetContent() {
                     actionParametersOf(ADD_WATER_ACTION to 250)
                 )
             )
+        )
+    }
+}
+
+@Composable
+fun ProgressBar(
+    progress: Float,
+    modifier: GlanceModifier = GlanceModifier,
+    backgroundColor: Color = Color(0xFFB0E0E6),
+    progressColor: Color = Color(0xFF00BFFF),
+    totalWidth: Dp = 200.dp
+) {
+    Row(
+        modifier = modifier
+            .width(totalWidth)
+            .height(10.dp)
+            .cornerRadius(16.dp)
+            .background(backgroundColor),
+        verticalAlignment = Alignment.Vertical.CenterVertically,
+        horizontalAlignment = Alignment.Horizontal.Start
+    ) {
+        Spacer(
+            GlanceModifier
+                .width((totalWidth * progress.coerceIn(0f, 1f)))
+                .height(10.dp)
+                .cornerRadius(10.dp)
+                .background(progressColor)
         )
     }
 }
